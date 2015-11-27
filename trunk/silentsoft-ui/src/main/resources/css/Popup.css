@@ -1,0 +1,17 @@
+.center_box {
+    -fx-border-width: 2 2 2 2;
+	-fx-border-color : #032651;
+    -fx-background-color: #032651;
+}
+.box-white-pop {
+    -fx-background-color: #FFFFFF;
+    -fx-background-image: url("../images/view/img/Pop-tit-notice.png");
+    -fx-background-size:100% 36;
+    -fx-background-position:left 0;
+    -fx-background-repeat: no-repeat ;
+}
+.pop-title {
+    -fx-font: 13px "Dotum";
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+}
