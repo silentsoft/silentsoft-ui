@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.image.*?>
+
+<AnchorPane fx:id="main" styleClass="center_box" stylesheets="@../../../../../../../css/Popup.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.samsung.sds.meerkat.ui.component.popup.PopupController">
+	<children>
+		<AnchorPane fx:id="head" prefHeight="35.0" styleClass="box-white-pop" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="2.0">
+			<children>
+				<Label fx:id="title" layoutX="14.0" layoutY="10.0" styleClass="pop-title" text="[TITLE]" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="2.0" />
+				<Button fx:id="closeButton" layoutX="327.0" layoutY="6.0" mnemonicParsing="false" onAction="#close_OnActionClick" AnchorPane.rightAnchor="7.0" />
+			</children>
+		</AnchorPane>
+		<AnchorPane fx:id="body" layoutY="35.0" style="-fx-background-color: #ffffff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0" />
+	</children>
+</AnchorPane>
