@@ -6,26 +6,24 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
- * Stage의 최대화를 설정하거나 해제합니다. 이때, 작업 표시줄은 최대화 영역에서 제외합니다.
- * @author Silentsoft
+ * Set the maximize property to Stage without taskbar area.
+ * @author silentsoft
  *
  */
 public class MaximizeProperty {
 	
 	private boolean isMaximized;
 	
-	private double prevX;
-	private double prevY;
-	private double prevWidth;
-	private double prevHeight;
+	private Delta delta;
 	
 	public MaximizeProperty(Stage stage) {
 		isMaximized = stage.isMaximized();
-		
-		prevX = stage.getX();
-		prevY = stage.getY();
-		prevWidth = stage.getWidth();
-		prevHeight = stage.getHeight();
+	
+		delta = new Delta();
+		delta.setX(stage.getX());
+		delta.setY(stage.getY());
+		delta.setWidth(stage.getWidth());
+		delta.setHeight(stage.getHeight());
 	}
 	
 	public void setMaximized(Stage stage, boolean value) {
@@ -34,10 +32,10 @@ public class MaximizeProperty {
 		if (isMaximized) {
 			ObservableList<Screen> screens = Screen.getScreensForRectangle(new Rectangle2D(stage.getX(), stage.getY(), stage.getWidth(), stage.getHeight()));
 			if (screens != null && screens.size() >= 1) {
-				prevX = stage.getX();
-				prevY = stage.getY();
-				prevWidth = stage.getWidth();
-				prevHeight = stage.getHeight();
+				delta.setX(stage.getX());
+				delta.setY(stage.getY());
+				delta.setWidth(stage.getWidth());
+				delta.setHeight(stage.getHeight());
 				
 				Rectangle2D bounds = screens.get(0).getVisualBounds();
 				stage.setX(bounds.getMinX());
@@ -46,10 +44,10 @@ public class MaximizeProperty {
 				stage.setHeight(bounds.getHeight());
 			}
 		} else {
-			stage.setX(prevX);
-			stage.setY(prevY);
-			stage.setWidth(prevWidth);
-			stage.setHeight(prevHeight);
+			stage.setX(delta.getX());
+			stage.setY(delta.getY());
+			stage.setWidth(delta.getWidth());
+			stage.setHeight(delta.getHeight());
 		}
 	}
 	

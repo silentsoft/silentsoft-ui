@@ -4,6 +4,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 
+/**
+ * @author silentsoft
+ */
 public class StageDragResizer extends DragResizer {
 
 	private final Stage stage;
@@ -19,16 +22,18 @@ public class StageDragResizer extends DragResizer {
 	}
 	
 	@Override
-	protected void drag(MouseEvent mouseEvent, DragMode dragMode, double newSize) {
-		super.drag(mouseEvent, dragMode, newSize);
+	protected void drag(MouseEvent mouseEvent, DragMode dragMode, double position, double size) {
+		super.drag(mouseEvent, dragMode, position, size);
 		
 		switch (dragMode) {
-		case WIDTH:
-			stage.setWidth(newSize);
-			break;
-		case HEIGHT:
-			stage.setHeight(newSize);
-			break;
-		}
+    	case WIDTH:
+    		stage.setX(position);
+    		stage.setWidth(size);
+    		break;
+    	case HEIGHT:
+    		stage.setY(position);
+    		stage.setHeight(size);
+    		break;
+    	}
 	}
 }

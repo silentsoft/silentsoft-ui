@@ -1,13 +1,17 @@
 package org.silentsoft.ui.model;
 
 /**
- * @author hs830.lee
+ * @author silentsoft
  */
 public class Delta {
 
 	private double x;
 	
 	private double y;
+	
+	private double width;
+	
+	private double height;
 
 	public double getX() {
 		return x;
@@ -24,4 +28,21 @@ public class Delta {
 	public void setY(double y) {
 		this.y = y;
 	}
+
+	public double getWidth() {
+		return width;
+	}
+
+	public void setWidth(double width) {
+		this.width = width;
+	}
+
+	public double getHeight() {
+		return height;
+	}
+
+	public void setHeight(double height) {
+		this.height = height;
+	}
+	
 }
