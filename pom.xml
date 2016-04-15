@@ -29,9 +29,6 @@
 
 		<!-- Logging -->
 		<slf4j.version>1.7.5</slf4j.version>
-
-		<buildtime>${maven.build.timestamp}</buildtime>
-		<project.deploymentdir>${basedir}/target/silentsoft-ui</project.deploymentdir>
 	</properties>
 
 	<build>
