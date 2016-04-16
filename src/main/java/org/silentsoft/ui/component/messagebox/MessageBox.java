@@ -1,17 +1,19 @@
 package org.silentsoft.ui.component.messagebox;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.Optional;
 
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.stage.Window;
 
-import org.controlsfx.control.action.Action;
-import org.controlsfx.dialog.Dialogs;
-
-@SuppressWarnings("deprecation")
 public final class MessageBox {
 	
 	public static void showAbout(String message) {
@@ -27,85 +29,45 @@ public final class MessageBox {
 	}
 	
 	public static void showInformation(Object owner, String masthead, String message) {
-		Platform.runLater(() -> {
-			String title = "Information";
-			
-			if (owner == null) {
-				if (masthead == null) {
-					Dialogs.create().title(title).message(message).showInformation();
-				} else {
-					Dialogs.create().title(title).masthead(masthead).message(message).showInformation();
-				}
-			} else {
-				if (masthead == null) {
-					Dialogs.create().owner(owner).title(title).message(message).showInformation();
-				} else {
-					Dialogs.create().owner(owner).title(title).masthead(masthead).message(message).showInformation();
-				}
-			}
-		});
+		String title = "Information";
+		
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(title);
+		alert.setHeaderText(masthead);
+		alert.setContentText(message);
+		
+		if (owner != null) {
+			alert.initOwner((Window) owner);
+		}
+		
+		alert.showAndWait();
 	}
 	
-	public static Action showConfirm(String message) {
+	public static Optional<ButtonType> showConfirm(String message) {
 		return showConfirm(null, null, message);
 	}
 	
-	public static Action showConfirm(Object owner, String message) {
+	public static Optional<ButtonType> showConfirm(Object owner, String message) {
 		return showConfirm(owner, null, message);
 	}
 	
-	public static Action showConfirm(String masthead, String message) {
+	public static Optional<ButtonType> showConfirm(String masthead, String message) {
 		return showConfirm(null, masthead, message);
 	}
 	
-	public static Action showConfirm(Object owner, String masthead, String message) {
-		//////////////////////////////////////////////////////////////
+	public static Optional<ButtonType> showConfirm(Object owner, String masthead, String message) {
 		String title = "Confirm";
 		
-		if (owner == null) {
-			if (masthead == null) {
-				return Dialogs.create().title(title).message(message).showConfirm();
-			} else {
-				return Dialogs.create().title(title).masthead(masthead).message(message).showConfirm();
-			}
-		} else {
-			if (masthead == null) {
-				return Dialogs.create().owner(owner).title(title).message(message).showConfirm();
-			} else {
-				return Dialogs.create().owner(owner).title(title).masthead(masthead).message(message).showConfirm();
-			}
-		}
-		//////////////////////////////////////////////////////////////
-		/**
-		FutureTask<Action> futureTask = new FutureTask<Action>(() -> {
-			String title = "Confirm";
-			
-			if (owner == null) {
-				if (masthead == null) {
-					return Dialogs.create().title(title).message(message).showConfirm();
-				} else {
-					return Dialogs.create().title(title).masthead(masthead).message(message).showConfirm();
-				}
-			} else {
-				if (masthead == null) {
-					return Dialogs.create().owner(owner).title(title).message(message).showConfirm();
-				} else {
-					return Dialogs.create().owner(owner).title(title).masthead(masthead).message(message).showConfirm();
-				}
-			}
-		});
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle(title);
+		alert.setHeaderText(masthead);
+		alert.setContentText(message);
 		
-		Platform.runLater(futureTask);
-		
-		Action action = null;
-		try {
-			action = futureTask.get();
-		} catch (Exception e) {
-			;
+		if (owner != null) {
+			alert.initOwner((Window) owner);
 		}
 		
-		return action;
-		*/
+		return alert.showAndWait();
 	}
 	
 	public static void showError(String message) {
@@ -121,23 +83,18 @@ public final class MessageBox {
 	}
 	
 	public static void showError(Object owner, String masthead, String message) {
-		Platform.runLater(() -> {
-			String title = "Error";
-			
-			if (owner == null) {
-				if (masthead == null) {
-					Dialogs.create().title(title).message(message).showError();
-				} else {
-					Dialogs.create().title(title).masthead(masthead).message(message).showError();
-				}
-			} else {
-				if (masthead == null) {
-					Dialogs.create().owner(owner).title(title).message(message).showError();
-				} else {
-					Dialogs.create().owner(owner).title(title).masthead(masthead).message(message).showError();
-				}
-			}
-		});
+		String title = "Error";
+		
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setTitle(title);
+		alert.setHeaderText(masthead);
+		alert.setContentText(message);
+		
+		if (owner != null) {
+			alert.initOwner((Window) owner);
+		}
+		
+		alert.showAndWait();
 	}
 	
 	public static void showException(Throwable exception) {
@@ -164,35 +121,40 @@ public final class MessageBox {
 		Platform.runLater(() -> {
 			String title = "Exception";
 			
-			if (owner == null) {
-				if (masthead == null) {
-					if (message == null) {
-						Dialogs.create().title(title).showException(exception);
-					} else {
-						Dialogs.create().title(title).message(message).showException(exception);
-					}
-				} else {
-					if (message == null) {
-						Dialogs.create().title(title).masthead(masthead).showException(exception);
-					} else {
-						Dialogs.create().title(title).masthead(masthead).message(message).showException(exception);
-					}
-				}
-			} else {
-				if (masthead == null) {
-					if (message == null) {
-						Dialogs.create().owner(owner).title(title).showException(exception);
-					} else {
-						Dialogs.create().owner(owner).title(title).message(message).showException(exception);
-					}
-				} else {
-					if (message == null) {
-						Dialogs.create().owner(owner).title(title).masthead(masthead).showException(exception);
-					} else {
-						Dialogs.create().owner(owner).title(title).masthead(masthead).message(message).showException(exception);
-					}
-				}
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle(title);
+			alert.setHeaderText(masthead);
+			alert.setContentText(message);
+			
+			if (owner != null) {
+				alert.initOwner((Window) owner);
 			}
+			
+			// Create expandable Exception.
+			StringWriter sw = new StringWriter();
+			PrintWriter pw = new PrintWriter(sw);
+			exception.printStackTrace(pw);
+			String exceptionText = sw.toString();
+
+			Label label = new Label("The exception stacktrace was:");
+
+			TextArea textArea = new TextArea(exceptionText);
+			textArea.setEditable(false);
+			textArea.setWrapText(true);
+
+			textArea.setMaxWidth(Double.MAX_VALUE);
+			textArea.setMaxHeight(Double.MAX_VALUE);
+			GridPane.setVgrow(textArea, Priority.ALWAYS);
+			GridPane.setHgrow(textArea, Priority.ALWAYS);
+
+			GridPane expContent = new GridPane();
+			expContent.setMaxWidth(Double.MAX_VALUE);
+			expContent.add(label, 0, 0);
+			expContent.add(textArea, 0, 1);
+
+			alert.getDialogPane().setExpandableContent(expContent);
+			
+			alert.showAndWait();
 		});
 	}
 }
