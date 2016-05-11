@@ -7,7 +7,7 @@ import javafx.scene.Parent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class AbstractViewer {
+public abstract class AbstractViewer implements Terminatable {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AbstractViewer.class);
 	
@@ -27,11 +27,27 @@ public abstract class AbstractViewer {
 					Platform.runLater(() -> {
 						controller.initialize(viewer, parameters);
 					});
+				} else if (oldValue != null && newValue == null) {
+					Platform.runLater(() -> {
+						controller.terminate();
+						controller = null;
+						
+						terminate();
+						viewer = null;
+					});
 				}
 			});
 		} catch (Exception e) {
 			LOGGER.error("I got catch an error during initialize the viewer !", e);
 		}
+	}
+	
+	/**
+	 * <em>NOTE</em> Please override this method when it need to terminate object by manually.
+	 */
+	@Override
+	public void terminate() {
+		
 	}
 	
 	public Parent getViewer() {

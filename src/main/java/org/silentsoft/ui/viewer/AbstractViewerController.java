@@ -1,9 +1,14 @@
 package org.silentsoft.ui.viewer;
 
-import javafx.scene.Parent;
 
-public abstract class AbstractViewerController {
-
-	protected abstract void initialize(Parent viewer, Object... parameters);
+public abstract class AbstractViewerController implements Initializable, Terminatable {
+	
+	/**
+	 * <em>NOTE</em> Please override this method when it need to terminate object by manually.
+	 */
+	@Override
+	public void terminate() {
+		
+	}
 	
 }
