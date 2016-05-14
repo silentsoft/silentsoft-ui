@@ -1,5 +1,7 @@
 package org.silentsoft.ui.viewer;
 
+import java.util.ResourceBundle;
+
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,8 +18,21 @@ public abstract class AbstractViewer implements Terminatable {
 	private AbstractViewerController controller;
 	
 	public AbstractViewer(Object... parameters) {
+		this(null, parameters);
+	}
+	
+	public AbstractViewer(ResourceBundle resources) {
+		this(resources, new Object[]{});
+	}
+	
+	public AbstractViewer(ResourceBundle resources, Object... parameters) {
 		try {
 			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(getClass().getSimpleName().concat(".fxml")));
+			
+			if (resources != null) {
+				fxmlLoader.setResources(resources);
+			}
+			
 			viewer = fxmlLoader.load();
 			controller = fxmlLoader.getController();
 			
