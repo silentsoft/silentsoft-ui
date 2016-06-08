@@ -1,7 +1,5 @@
 package org.silentsoft.ui.component.popup;
 
-import org.silentsoft.ui.component.popup.Popup.CloseType;
-
 import javafx.collections.ObservableMap;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -9,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+
+import org.silentsoft.ui.component.popup.Popup.CloseType;
 
 public class PopupController {
 
@@ -66,10 +66,6 @@ public class PopupController {
 
 		body.getChildren().clear();
 		body.getChildren().add(popup);
-	}
-
-	protected AnchorPane getMain() {
-		return main;
 	}
 
 	@FXML
