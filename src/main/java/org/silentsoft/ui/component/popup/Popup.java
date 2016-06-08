@@ -110,13 +110,9 @@ public class Popup {
 			}
 		});
 
-		double prefWidth = parent.prefWidth(0);
-		double prefHeight = parent.prefHeight(0);
-		Scene scene = new Scene(parent, prefWidth, prefHeight);
-
-		stage.setScene(scene);
-		stage.setX(owner.getX() + (owner.getWidth() / 2) - (scene.getWidth() / 2));
-		stage.setY(owner.getY() + (owner.getHeight() / 2) - (scene.getHeight() / 2));
+		stage.setScene(new Scene(parent));
+		stage.setX(owner.getX() + (owner.getWidth() / 2) - (parent.prefWidth(0) / 2));
+		stage.setY(owner.getY() + (owner.getHeight() / 2) - (parent.prefHeight(0) / 2));
 		
 		if (isModal) {
 			stage.showAndWait();
