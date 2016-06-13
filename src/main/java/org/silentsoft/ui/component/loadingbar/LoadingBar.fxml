@@ -5,23 +5,11 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ProgressIndicator?>
 
 
-<AnchorPane prefHeight="50.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="70.0" prefWidth="70.0" style="-fx-background-color: transparent;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
    <children>
-      <VBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-         <children>
-            <HBox alignment="CENTER" prefHeight="15.0" prefWidth="300.0" VBox.vgrow="ALWAYS">
-               <children>
-                  <Label text="Loading..." textAlignment="CENTER" HBox.hgrow="ALWAYS">
-                     <font>
-                        <Font name="Tahoma Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
-            <ProgressBar prefHeight="18.0" prefWidth="300.0" VBox.vgrow="ALWAYS" />
-         </children>
-      </VBox>
+      <ProgressIndicator prefHeight="70.0" prefWidth="70.0" />
    </children>
 </AnchorPane>
