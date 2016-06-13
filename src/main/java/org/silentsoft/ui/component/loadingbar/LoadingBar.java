@@ -1,8 +1,12 @@
 package org.silentsoft.ui.component.loadingbar;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -18,6 +22,14 @@ public class LoadingBar {
 	private static Stage stage;
 	
 	public synchronized static void show(Window owner) {
+		show(owner, null);
+	}
+	
+	public synchronized static void show(Window owner, KeyCode hideKeyCode) {
+		show(owner, hideKeyCode, null);
+	}
+	
+	public synchronized static void show(Window owner, KeyCode hideKeyCode, Runnable hideKeyTriggerAction) {
 		Parent parent = null;
 		
 		try {
@@ -33,18 +45,38 @@ public class LoadingBar {
 		}
 		
 		if (stage != null) {
-			LOGGER.info("LoadingBar already showed ! So, I'll hide first. and show later !");
+			LOGGER.info("LoadingBar already shown ! So, I'll hide first. and show later !");
 			hide();
 		}
 		
 		stage = new Stage();
 		
+		if (hideKeyCode != null) {
+			stage.addEventHandler(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
+				@Override
+				public void handle(KeyEvent event) {
+					KeyCode code = event.getCode();
+					if (code.isModifierKey() == false && code == hideKeyCode) {
+						if (hideKeyTriggerAction != null) {
+							try {
+								hideKeyTriggerAction.run();
+							} catch (Exception e) {
+								;
+							}
+						}
+						
+						hide();
+					}
+				}
+			});
+		}
+		
 		stage.setResizable(false);
 		
-		stage.initModality(Modality.NONE);
-		stage.initStyle(StageStyle.UNDECORATED);
+		stage.initModality(Modality.APPLICATION_MODAL);
+		stage.initStyle(StageStyle.TRANSPARENT);
 		
-		stage.setScene(new Scene(parent, parent.prefWidth(0), parent.prefHeight(0)));
+		stage.setScene(new Scene(parent, Color.TRANSPARENT));
 		
 		if (owner == null) {
 			LOGGER.debug("owner is null. So, I'll skip to initOwner !");
@@ -53,14 +85,14 @@ public class LoadingBar {
 		} else {
 			stage.initOwner(owner);
 			
-			stage.setX(owner.getX() + (owner.getWidth()/2) - (stage.getScene().getWidth()/2));
-			stage.setY(owner.getY() + (owner.getHeight()/2) - (stage.getScene().getHeight()/2));
+			stage.setX(owner.getX() + (owner.getWidth() / 2) - (parent.prefWidth(0) / 2));
+			stage.setY(owner.getY() + (owner.getHeight() / 2) - (parent.prefHeight(0) / 2));
 		}
 		
 		stage.setAlwaysOnTop(true);
 		stage.show();
 		
-		LOGGER.debug("LoadingBar showed !");
+		LOGGER.debug("LoadingBar shown !");
 	}
 	
 	public synchronized static void hide() {
