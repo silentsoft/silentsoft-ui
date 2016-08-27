@@ -2,6 +2,8 @@ package org.silentsoft.ui.model;
 
 import javafx.collections.ObservableList;
 import javafx.geometry.Rectangle2D;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
@@ -37,11 +39,22 @@ public class MaximizeProperty {
 				delta.setWidth(stage.getWidth());
 				delta.setHeight(stage.getHeight());
 				
-				Rectangle2D bounds = screens.get(0).getVisualBounds();
-				stage.setX(bounds.getMinX());
-				stage.setY(bounds.getMinY());
-				stage.setWidth(bounds.getWidth());
-				stage.setHeight(bounds.getHeight());
+				double stageDistance = 0.0;
+				Shape stageRectangle = new Rectangle(delta.getX(), delta.getY(), delta.getWidth(), delta.getHeight());
+				for (Screen screen : screens) {
+					Rectangle2D screenVisualBounds = screen.getVisualBounds();
+					Shape shape = Rectangle.intersect(stageRectangle, new Rectangle(screenVisualBounds.getMinX(), screenVisualBounds.getMinY(), screenVisualBounds.getWidth(), screenVisualBounds.getHeight()));
+					
+					double shapeDistance = shape.getLayoutBounds().getWidth() + shape.getLayoutBounds().getHeight();
+					if (stageDistance <= shapeDistance) {
+						stage.setX(screenVisualBounds.getMinX());
+						stage.setY(screenVisualBounds.getMinY());
+						stage.setWidth(screenVisualBounds.getWidth());
+						stage.setHeight(screenVisualBounds.getHeight());
+						
+						stageDistance = shapeDistance;
+					}
+				}
 			}
 		} else {
 			stage.setX(delta.getX());
