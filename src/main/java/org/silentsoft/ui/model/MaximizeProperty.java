@@ -64,7 +64,7 @@ public class MaximizeProperty {
 		}
 	}
 	
-	public boolean getMaximized() {
+	public boolean isMaximized() {
 		return isMaximized;
 	}
 }
