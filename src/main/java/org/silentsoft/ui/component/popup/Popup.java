@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
 
+import org.silentsoft.ui.util.StageUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,6 +71,8 @@ public class Popup {
 		}
 
 		Stage stage = new Stage();
+		
+		StageUtil.registerStage(stage);
 		
 		stage.initOwner(owner);
 		if (isModal) {
