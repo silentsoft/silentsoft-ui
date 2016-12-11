@@ -17,15 +17,30 @@ import javafx.stage.Window;
 public final class MessageBox {
 	
 	public static void showAbout(String message) {
-		showInformation(null, null, message);
+		showAbout(null, null, message);
 	}
 	
 	public static void showAbout(Object owner, String message) {
-		showInformation(owner, null, message);
+		showAbout(owner, null, message);
 	}
 	
 	public static void showAbout(String masthead, String message) {
-		showInformation(null, masthead, message);
+		showAbout(null, masthead, message);
+	}
+	
+	public static void showAbout(Object owner, String masthead, String message) {
+		String title = "About";
+		
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setTitle(title);
+		alert.setHeaderText(masthead);
+		alert.setContentText(message);
+		
+		if (owner != null) {
+			alert.initOwner((Window) owner);
+		}
+		
+		alert.showAndWait();
 	}
 	
 	public static void showInformation(Object owner, String masthead, String message) {
