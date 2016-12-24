@@ -7,11 +7,20 @@ import javafx.scene.layout.Region;
  */
 public class RegionDragResizer extends DragResizer {
 
+	public static void makeResizable(Region region) {
+		new RegionDragResizer(region);
+	}
+	
+	public static void makeResizable(Region region, int margin) {
+		new RegionDragResizer(region, margin);
+	}
+	
 	private RegionDragResizer(Region region) {
 		super(region);
 	}
 	
-	public static void makeResizable(Region region) {
-		new RegionDragResizer(region);
+	private RegionDragResizer(Region region, int margin) {
+		super(region, margin);
 	}
+	
 }

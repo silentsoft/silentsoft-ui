@@ -11,14 +11,24 @@ public class StageDragResizer extends DragResizer {
 
 	private final Stage stage;
 	
+	public static void makeResizable(Stage stage, Region region) {
+		new StageDragResizer(stage, region);
+	}
+	
+	public static void makeResizable(Stage stage, Region region, int margin) {
+		new StageDragResizer(stage, region, margin);
+	}
+	
 	private StageDragResizer(Stage stage, Region region) {
 		super(region);
 		
 		this.stage = stage;
 	}
 	
-	public static void makeResizable(Stage stage, Region region) {
-		new StageDragResizer(stage, region);
+	private StageDragResizer(Stage stage, Region region, int margin) {
+		super(region, margin);
+		
+		this.stage = stage;
 	}
 	
 	@Override

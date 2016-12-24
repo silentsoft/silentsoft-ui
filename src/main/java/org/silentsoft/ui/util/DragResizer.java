@@ -15,10 +15,10 @@ public abstract class DragResizer {
 		WIDTH,
 		HEIGHT
 	}
-    
-    private static final int RESIZE_MARGIN = 7;
 
     private final Region region;
+    
+    private final int margin;
 
     private Delta delta;
     
@@ -36,19 +36,25 @@ public abstract class DragResizer {
     private boolean isDragForNorth;
     
     protected DragResizer(Region region) {
-        this.region = region;
+        this(region, 7);
+    }
+    
+    protected DragResizer(Region region, int margin) {
+    	this.region = region;
+    	this.margin = margin;
+    	
         delta = new Delta();
 
-		region.addEventHandler(MouseEvent.MOUSE_MOVED, (event) -> {
+		region.addEventFilter(MouseEvent.MOUSE_MOVED, (event) -> {
 			mouseMoved(event);
 		});
-        region.addEventHandler(MouseEvent.MOUSE_PRESSED, (event) -> {
+        region.addEventFilter(MouseEvent.MOUSE_PRESSED, (event) -> {
         	mousePressed(event);
         });
-		region.addEventHandler(MouseEvent.MOUSE_DRAGGED, (event) -> {
+		region.addEventFilter(MouseEvent.MOUSE_DRAGGED, (event) -> {
         	mouseDragged(event);
         });
-		region.addEventHandler(MouseEvent.MOUSE_RELEASED, (event) -> {
+		region.addEventFilter(MouseEvent.MOUSE_RELEASED, (event) -> {
 			mouseReleased(event);
 		});
     }
@@ -151,19 +157,19 @@ public abstract class DragResizer {
     }
     
     protected boolean isInDraggableZoneForEast(MouseEvent event) {
-    	return (event.getSceneX() > (region.getWidth() - RESIZE_MARGIN));
+    	return (event.getSceneX() > region.getWidth());
     }
     
     protected boolean isInDraggableZoneForWest(MouseEvent event) {
-    	return (event.getSceneX() < RESIZE_MARGIN);
+    	return (event.getSceneX() - margin < 0);
     }
     
     protected boolean isInDraggableZoneForSouth(MouseEvent event) {
-    	return (event.getSceneY() > (region.getHeight() - RESIZE_MARGIN));
+    	return (event.getSceneY() > region.getHeight());
     }
     
     protected boolean isInDraggableZoneForNorth(MouseEvent event) {
-    	return (event.getSceneY() < RESIZE_MARGIN);
+    	return (event.getSceneY() < margin);
     }
 
     protected boolean isInDraggableZone(MouseEvent event) {
