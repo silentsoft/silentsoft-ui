@@ -19,6 +19,10 @@ public class StageDragResizer extends DragResizer {
 		new StageDragResizer(stage, region, margin);
 	}
 	
+	public static void makeResizable(Stage stage, Region region, int margin, Runnable dragDoneAction) {
+		new StageDragResizer(stage, region, margin, dragDoneAction);
+	}
+	
 	private StageDragResizer(Stage stage, Region region) {
 		super(region);
 		
@@ -27,6 +31,12 @@ public class StageDragResizer extends DragResizer {
 	
 	private StageDragResizer(Stage stage, Region region, int margin) {
 		super(region, margin);
+		
+		this.stage = stage;
+	}
+	
+	private StageDragResizer(Stage stage, Region region, int margin, Runnable dragDoneAction) {
+		super(region, margin, dragDoneAction);
 		
 		this.stage = stage;
 	}

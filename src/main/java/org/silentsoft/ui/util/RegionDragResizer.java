@@ -15,12 +15,20 @@ public class RegionDragResizer extends DragResizer {
 		new RegionDragResizer(region, margin);
 	}
 	
+	public static void makeResizable(Region region, int margin, Runnable dragDoneAction) {
+		new RegionDragResizer(region, margin, dragDoneAction);
+	}
+	
 	private RegionDragResizer(Region region) {
 		super(region);
 	}
 	
 	private RegionDragResizer(Region region, int margin) {
 		super(region, margin);
+	}
+	
+	private RegionDragResizer(Region region, int margin, Runnable dragDoneAction) {
+		super(region, margin, dragDoneAction);
 	}
 	
 }

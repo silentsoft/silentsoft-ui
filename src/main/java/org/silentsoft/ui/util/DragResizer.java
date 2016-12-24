@@ -19,6 +19,8 @@ public abstract class DragResizer {
     private final Region region;
     
     private final int margin;
+    
+    private final Runnable dragDoneAction;
 
     private Delta delta;
     
@@ -40,8 +42,13 @@ public abstract class DragResizer {
     }
     
     protected DragResizer(Region region, int margin) {
+    	this(region, margin, null);
+    }
+    
+    protected DragResizer(Region region, int margin, Runnable dragDoneAction) {
     	this.region = region;
     	this.margin = margin;
+    	this.dragDoneAction = dragDoneAction;
     	
         delta = new Delta();
 
@@ -153,7 +160,13 @@ public abstract class DragResizer {
     
     protected void mouseReleased(MouseEvent event) {
     	isDragging = false;
-        region.setCursor(Cursor.DEFAULT);
+    	region.setCursor(Cursor.DEFAULT);
+    	
+    	if (isDragForEast || isDragForWest || isDragForSouth || isDragForNorth) {
+    		if (dragDoneAction != null) {
+    			dragDoneAction.run();
+    		}
+    	}
     }
     
     protected boolean isInDraggableZoneForEast(MouseEvent event) {
