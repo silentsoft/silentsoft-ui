@@ -11,6 +11,8 @@ public class StageDragResizer extends DragResizer {
 
 	private final Stage stage;
 	
+	private int shadow = 0;
+	
 	public static void makeResizable(Stage stage, Region region) {
 		new StageDragResizer(stage, region);
 	}
@@ -21,6 +23,10 @@ public class StageDragResizer extends DragResizer {
 	
 	public static void makeResizable(Stage stage, Region region, int margin, Runnable dragDoneAction) {
 		new StageDragResizer(stage, region, margin, dragDoneAction);
+	}
+	
+	public static void makeResizable(Stage stage, Region region, int margin, int shadow, Runnable dragDoneAction) {
+		new StageDragResizer(stage, region, margin, shadow, dragDoneAction);
 	}
 	
 	private StageDragResizer(Stage stage, Region region) {
@@ -36,9 +42,14 @@ public class StageDragResizer extends DragResizer {
 	}
 	
 	private StageDragResizer(Stage stage, Region region, int margin, Runnable dragDoneAction) {
+		this(stage, region, margin, 0, dragDoneAction);
+	}
+	
+	private StageDragResizer(Stage stage, Region region, int margin, int shadow, Runnable dragDoneAction) {
 		super(region, margin, dragDoneAction);
 		
 		this.stage = stage;
+		this.shadow = shadow;
 	}
 	
 	@Override
@@ -48,11 +59,11 @@ public class StageDragResizer extends DragResizer {
 		switch (dragMode) {
     	case WIDTH:
     		stage.setX(position);
-    		stage.setWidth(size);
+    		stage.setWidth(size + shadow);
     		break;
     	case HEIGHT:
     		stage.setY(position);
-    		stage.setHeight(size);
+    		stage.setHeight(size + shadow);
     		break;
     	}
 	}
