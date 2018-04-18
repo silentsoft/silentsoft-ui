@@ -38,7 +38,7 @@ public abstract class DragResizer {
     private boolean isDragForNorth;
     
     protected DragResizer(Region region) {
-        this(region, 7);
+        this(region, 0);
     }
     
     protected DragResizer(Region region, int margin) {
