@@ -170,7 +170,7 @@ public abstract class DragResizer {
     }
     
     protected boolean isInDraggableZoneForEast(MouseEvent event) {
-    	return (event.getSceneX() > region.getWidth());
+    	return (event.getSceneX() + margin > region.getWidth());
     }
     
     protected boolean isInDraggableZoneForWest(MouseEvent event) {
@@ -178,7 +178,7 @@ public abstract class DragResizer {
     }
     
     protected boolean isInDraggableZoneForSouth(MouseEvent event) {
-    	return (event.getSceneY() > region.getHeight());
+    	return (event.getSceneY() + margin > region.getHeight());
     }
     
     protected boolean isInDraggableZoneForNorth(MouseEvent event) {
