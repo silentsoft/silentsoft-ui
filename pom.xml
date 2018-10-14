@@ -7,9 +7,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.silentsoft</groupId>
 	<artifactId>silentsoft-ui</artifactId>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 
 	<repositories>
+		<repository>
+			<id>silentsoft-repository</id>
+			<url>http://nexus.silentsoft.org/repository/maven-releases</url>
+		</repository>
 		<repository>
 			<id>maven-repo</id>
 			<url>http://central.maven.org/maven2</url>
@@ -48,5 +52,12 @@
 			<version>${slf4j.version}</version>
 		</dependency>
 	</dependencies>
+	
+	<distributionManagement>
+		<repository>
+			<id>maven-releases</id>
+			<url>http://nexus.silentsoft.org/repository/maven-releases</url>
+		</repository>
+	</distributionManagement>
 
 </project>
