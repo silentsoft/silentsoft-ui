@@ -198,5 +198,7 @@ public abstract class DragResizer {
     		region.setPrefHeight(size);
     		break;
     	}
+    	
+    	region.requestLayout();
     }
 }
