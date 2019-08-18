@@ -3,8 +3,8 @@ Copyright (c) silentsoft.org. All rights reserved.
 
 This product includes software developed by The Apache Software Foundation (http://www.apache.org/).
 
-__controlsfx 8.40.10__
- * https://bitbucket.org/controlsfx/controlsfx
+__controlsfx 8.40.15__
+ * https://github.com/controlsfx/controlsfx
  * BSD-3-Clause
 
 __log4j 1.2.17__
