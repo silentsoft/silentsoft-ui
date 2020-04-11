@@ -13,14 +13,16 @@ import java.util.ResourceBundle.Control;
 import javafx.fxml.LoadException;
 
 /**
- * Custom UTF-8 based control that support internationalization message.
- * If the message were not found on language file, it will be appear original key without {@link LoadException}.
+ * UTF-8 based control for supports internationalization message.
+ * This class will not throw {@link LoadException} even if the proper message key isn't exists.
+ * <p>
+ * <em>
+ * Special thanks to DemkaAge and KYJ.
+ * </em>
  * </p>
- * <em>The source code for this class is customized based on https://gist.github.com/DemkaAge/8999236</em>
- * </p>
- * <em>Special thanks to DemkaAge and KYJ.</em>
  * 
  * @see Control
+ * @see <a href="https://gist.github.com/DemkaAge/8999236">https://gist.github.com/DemkaAge/8999236</a>
  */
 public class UTF8Control extends Control {
 
