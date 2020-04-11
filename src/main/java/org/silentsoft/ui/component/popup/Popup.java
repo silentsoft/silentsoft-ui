@@ -26,23 +26,22 @@ public class Popup {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Popup.class);
 
-	/**
-	 * FOCUS_BASE
-	 * 	: close when lost focus</p>
-	 * BUTTON_BASE
-	 * 	: close when user click close button that default designed</p>
-	 * BUILT_IN_BASE
-	 *  : close when user click built in designed close button(= User custom design.fxml)</p>
-	 * PLATFORM_FRAME_BASE
-	 *  : close when user click platform framed close button(= StageStyle.DECORATED)</p>
-	 *    
-	 * @author Silentsoft
-	 *
-	 */
 	public enum CloseType {
+		/**
+		 * Close when lost focus.
+		 */
 		FOCUS_BASE,
+		/**
+		 * Close when user clicks default close button.
+		 */
 		BUTTON_BASE,
+		/**
+		 * Close when user clicks built in close button(= User custom design)
+		 */
 		BUILT_IN_BASE,
+		/**
+		 * Close when user clicks platform frame close button(= StageStyle.DECORATED)
+		 */
 		PLATFORM_FRAME_BASE,
 	};
 
