@@ -38,7 +38,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<controlsfx.version>8.40.15</controlsfx.version>
+		<controlsfx.version>8.40.16</controlsfx.version>
 		<slf4j.version>1.7.25</slf4j.version>
 	</properties>
 
